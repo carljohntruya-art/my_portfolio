@@ -99,7 +99,7 @@ export const Home: React.FC = () => {
                   <img 
                     alt="CJ Avatar" 
                     className="w-full h-full object-cover" 
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIiGuFCSdts6egqA5OpQBFw1qEcAjQGZKudpSvRbsOo8urea80evxNz3-FplPUtmjHSAi2TQeuQxzWE5F5skDllC9U3Bcx5LFFMpcZRJiGTo4JMIfkinzBhBtGPfxfh4sv3FAW3l79ZKcrpSySjFMCsqnimArSqn59WPxDR3srcrUW_P8WEs5pY-ZUVtVH-AggSzg90Hqu2GSrNJnvVN4l7koGFNW6CoRXZYtA6X7K40u8FoGWgFFoT8vpoxKdx5--ZyaRozl5gGrY" 
+                    src="./assets/cjj.jpg"
                   />
                 </div>
                 <div>
