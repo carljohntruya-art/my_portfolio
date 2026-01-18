@@ -104,11 +104,11 @@ export const Home: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-white">CJ</h3>
-                  <p className="text-sm text-primary font-medium">CS Student @ University</p>
+                  <p className="text-sm text-primary font-medium">CS Student @Biliran Province State University</p>
                 </div>
               </div>
               <p className="text-slate-300 text-base leading-relaxed">
-                I don't just write code; I build systems. Currently pursuing my CS degree, I blend academic fundamentals—like algorithms and data structures—with modern full-stack development.
+                I don't just write code; I build systems. Currently pursuing my CS degree, I blend academic fundamentals like algorithms and data structures with modern full-stack development.
               </p>
               <div className="mt-2">
                 <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Technologies</p>

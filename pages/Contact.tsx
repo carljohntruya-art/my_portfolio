@@ -31,30 +31,40 @@ export const Contact: React.FC = () => {
             </p>
          </div>
 
-         <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
+         <form 
+            action="https://formspree.io/f/YOUR_FORM_ID_HERE" 
+            method="POST" 
+            className="flex flex-col gap-4"
+         >
             <div className="flex flex-col gap-1">
                <input 
+                  name="name"
                   type="text" 
                   placeholder="Your Name" 
+                  required
                   className="h-14 px-5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                />
             </div>
             <div className="flex flex-col gap-1">
                <input 
+                  name="email"
                   type="email" 
                   placeholder="Your Email" 
+                  required
                   className="h-14 px-5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                />
             </div>
             <div className="flex flex-col gap-1">
                <textarea 
+                  name="message"
                   placeholder="How can I help you?" 
                   rows={4}
+                  required
                   className="p-5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none"
                ></textarea>
             </div>
             
-            <button className="h-14 mt-2 rounded-xl bg-primary hover:bg-primary/90 text-white font-bold tracking-wide shadow-lg shadow-primary/25 flex items-center justify-center gap-2 transition-transform active:scale-[0.98]">
+            <button type="submit" className="h-14 mt-2 rounded-xl bg-primary hover:bg-primary/90 text-white font-bold tracking-wide shadow-lg shadow-primary/25 flex items-center justify-center gap-2 transition-transform active:scale-[0.98]">
                <span>Send Message</span>
                <span className="material-symbols-outlined text-[20px]">send</span>
             </button>
@@ -67,9 +77,9 @@ export const Contact: React.FC = () => {
             <button className="size-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors">
                <span className="material-symbols-outlined text-slate-400">connect_without_contact</span>
             </button>
-            <button className="size-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors">
+            <a href="mailto:carljohntruya@gmail.com" className="size-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors">
                <span className="material-symbols-outlined text-slate-400">alternate_email</span>
-            </button>
+            </a>
          </div>
          
          <p className="text-center text-[10px] text-slate-600 mt-8 uppercase tracking-widest">
