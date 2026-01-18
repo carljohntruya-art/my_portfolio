@@ -32,7 +32,7 @@ export const Contact: React.FC = () => {
          </div>
 
          <form 
-            action="https://formspree.io/f/YOUR_FORM_ID_HERE" 
+            action="https://formspree.io/f/xaqqeood" 
             method="POST" 
             className="flex flex-col gap-4"
          >
