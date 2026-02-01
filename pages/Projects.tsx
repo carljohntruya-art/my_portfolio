@@ -1,5 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+// @ts-ignore
+import jusasImage from '../assets/jusas-tropical.png';
+// @ts-ignore
+import bipsuImage from '../assets/bipsu-dashboard.png';
 
 export const Projects: React.FC = () => {
   const navigate = useNavigate();
@@ -26,34 +30,73 @@ export const Projects: React.FC = () => {
           </p>
         </div>
 
-        {/* Project 1: Jusas Tropical Smoothie */}
+        {/* Project 1: Jusas Smoothie Tropical App */}
         <div className="animate-fade-in-up delay-100 group">
           <div className="flex flex-col rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow bg-surface border border-slate-800">
             <div className="w-full h-48 bg-slate-800 relative overflow-hidden cursor-pointer" onClick={() => navigate('/project/jusas')}>
               <div 
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" 
-                style={{backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuArQksQkpW9CpwhVpHk0afRvzYkorBMslAp7Xxx2nFjuvVS1ACxpx0M0yY6-YiRiLIX9rSJE4FTnhitEZGV8yostdOhmetJ_OVJb68Hc_Lvj2sb157mv0E_zF8rIr_ry9YohfIbbJfOjH-Ve0zq538hyHacW6cNAOnbD_2VV8qdV4HaB3Dz8N5H_sEXnqP1TVaGxsdX0ASTtpAw7EYmjr0EvPYq_ACq_3CqEL70rfSYoWk2G6K5ufxGfM8yCM1hWEp9Od7wojl--2ug")'}}
+                style={{backgroundImage: `url(${jusasImage})`}}
               ></div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
               <div className="absolute bottom-3 left-3 flex gap-2">
-                <span className="px-2 py-1 text-xs font-medium bg-black/50 backdrop-blur-sm text-white rounded-md border border-white/10">Full-Stack</span>
-                <span className="px-2 py-1 text-xs font-medium bg-black/50 backdrop-blur-sm text-white rounded-md border border-white/10">POS</span>
+                <span className="px-2 py-1 text-xs font-medium bg-black/50 backdrop-blur-sm text-white rounded-md border border-white/10">Mobile/Web App</span>
+                <span className="px-2 py-1 text-xs font-medium bg-black/50 backdrop-blur-sm text-white rounded-md border border-white/10">UI/UX Focus</span>
               </div>
             </div>
             <div className="p-5 flex flex-col gap-3">
               <div className="flex justify-between items-start">
-                <h3 className="text-xl font-bold text-white leading-tight">Jusas Tropical Smoothie</h3>
+                <h3 className="text-xl font-bold text-white leading-tight">Jusas Smoothie Tropical App</h3>
               </div>
               <p className="text-text-secondary text-sm leading-relaxed">
-                Streamlining orders for high-volume service with a custom POS system that handles concurrent requests with zero latency.
+                Create a smooth ordering experience for customers with menu browsing, smoothie customization, and order tracking.
+              </p>
+              <div className="flex flex-wrap gap-2 pt-1">
+                <span className="text-xs font-medium text-primary bg-primary/10 px-2.5 py-1 rounded-md">React Web</span>
+                <span className="text-xs font-medium text-primary bg-primary/10 px-2.5 py-1 rounded-md">Tailwind CSS</span>
+                <span className="text-xs font-medium text-primary bg-primary/10 px-2.5 py-1 rounded-md">Firebase/API</span>
+              </div>
+              <div className="flex gap-2">
+                <button onClick={() => navigate('/project/jusas')} className="mt-2 flex-1 flex items-center justify-center gap-2 h-10 px-4 bg-primary hover:bg-primary/90 active:scale-[0.98] transition-all rounded-lg text-white text-sm font-medium">
+                  <span>View Case Study</span>
+                  <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </button>
+                <a href="https://jusas-new.vercel.app" target="_blank" rel="noopener noreferrer" className="mt-2 flex-shrink-0 flex items-center justify-center size-10 bg-slate-800 hover:bg-slate-700 active:scale-[0.98] transition-all rounded-lg text-white" aria-label="Live Demo">
+                   <span className="material-symbols-outlined text-[18px]">rocket_launch</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Project 2: Bipsu Complaint System */}
+        <div className="animate-fade-in-up delay-150 group">
+          <div className="flex flex-col rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow bg-surface border border-slate-800">
+            <div className="w-full h-48 bg-slate-800 relative overflow-hidden cursor-pointer" onClick={() => navigate('/project/bipsu')}>
+              <div 
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" 
+                style={{backgroundImage: `url(${bipsuImage})`}}
+              ></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div className="absolute bottom-3 left-3 flex gap-2">
+                <span className="px-2 py-1 text-xs font-medium bg-black/50 backdrop-blur-sm text-white rounded-md border border-white/10">Administrative</span>
+                <span className="px-2 py-1 text-xs font-medium bg-black/50 backdrop-blur-sm text-white rounded-md border border-white/10">Web App</span>
+              </div>
+            </div>
+            <div className="p-5 flex flex-col gap-3">
+              <div className="flex justify-between items-start">
+                <h3 className="text-xl font-bold text-white leading-tight">Bipsu Complaint System</h3>
+              </div>
+              <p className="text-text-secondary text-sm leading-relaxed">
+                Enable students to submit complaints/issues, track status, and generate reports efficiently.
               </p>
               <div className="flex flex-wrap gap-2 pt-1">
                 <span className="text-xs font-medium text-primary bg-primary/10 px-2.5 py-1 rounded-md">React</span>
-                <span className="text-xs font-medium text-primary bg-primary/10 px-2.5 py-1 rounded-md">Node.js</span>
+                <span className="text-xs font-medium text-primary bg-primary/10 px-2.5 py-1 rounded-md">Node/Express</span>
                 <span className="text-xs font-medium text-primary bg-primary/10 px-2.5 py-1 rounded-md">MySQL</span>
               </div>
-              <button onClick={() => navigate('/project/jusas')} className="mt-2 w-full flex items-center justify-center gap-2 h-10 px-4 bg-primary hover:bg-primary/90 active:scale-[0.98] transition-all rounded-lg text-white text-sm font-medium">
-                <span>View Case Study</span>
+              <button onClick={() => navigate('/project/bipsu')} className="mt-2 w-full flex items-center justify-center gap-2 h-10 px-4 bg-slate-800 hover:bg-slate-700 active:scale-[0.98] transition-all rounded-lg text-white text-sm font-medium">
+                <span>View Details</span>
                 <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
               </button>
             </div>
