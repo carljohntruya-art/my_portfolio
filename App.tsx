@@ -11,13 +11,16 @@ import { RoutePath } from './types';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const location = useLocation();
-  const showBottomNav = [RoutePath.PROJECTS, RoutePath.STACK, RoutePath.CONTACT].includes(location.pathname as RoutePath) || location.pathname === '/';
+  // Show bottom nav on all main routes
+  const showBottomNav = (Object.values(RoutePath) as string[]).includes(location.pathname);
 
   return (
-    <div className="bg-background-dark min-h-screen text-white">
-      {children}
-      {showBottomNav && <BottomNav />}
-      <ChatWidget />
+    <div className="bg-background min-h-screen text-text-primary font-display">
+       <div className="min-h-screen pb-16">
+          {children}
+       </div>
+       {showBottomNav && <BottomNav />}
+       <ChatWidget />
     </div>
   );
 };

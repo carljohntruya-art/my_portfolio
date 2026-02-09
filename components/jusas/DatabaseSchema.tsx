@@ -16,8 +16,8 @@ export const DatabaseSchema: React.FC = () => {
     },
     {
       name: 'OrderItems',
-      color: 'border-purple-500',
-      header: 'bg-purple-500/20',
+      color: 'border-accent-purple',
+      header: 'bg-accent-purple/20',
       fields: ['id (PK)', 'order_id (FK)', 'product_id (FK)', 'quantity', 'subtotal']
     },
     {
@@ -38,14 +38,14 @@ export const DatabaseSchema: React.FC = () => {
       <div className="overflow-x-auto pb-4">
         <div className="flex flex-wrap justify-center gap-6 min-w-[300px]">
           {tables.map((table) => (
-            <div key={table.name} className={`w-40 bg-slate-800 rounded-lg border-t-4 ${table.color} shadow-lg overflow-hidden`}>
-              <div className={`${table.header} p-2 text-center border-b border-slate-700`}>
+            <div key={table.name} className={`w-40 bg-surface rounded-lg border-t-4 ${table.color} shadow-card overflow-hidden transition-transform hover:-translate-y-1 duration-300`}>
+              <div className={`${table.header} p-2 text-center border-b border-white/5`}>
                 <span className="text-xs font-bold text-white uppercase tracking-wider">{table.name}</span>
               </div>
               <div className="p-3 space-y-1.5">
                 {table.fields.map((field, i) => (
-                  <div key={i} className="flex items-center gap-2 text-[10px] text-gray-300 font-mono">
-                    <span className="w-1.5 h-1.5 rounded-full bg-slate-600"></span>
+                  <div key={i} className="flex items-center gap-2 text-[10px] text-text-secondary font-mono">
+                    <span className="w-1.5 h-1.5 rounded-full bg-white/20"></span>
                     {field}
                   </div>
                 ))}
@@ -55,11 +55,11 @@ export const DatabaseSchema: React.FC = () => {
         </div>
         
         {/* Relationships Hint */}
-        <div className="mt-6 flex justify-center gap-4 text-xs text-gray-500">
+        <div className="mt-6 flex justify-center gap-4 text-xs text-text-muted">
           <div className="flex items-center gap-1">
-             <div className="w-4 h-0.5 bg-slate-600"></div>
+             <div className="w-4 h-0.5 bg-white/20"></div>
              <span>One to Many</span>
-             <div className="w-4 h-0.5 bg-slate-600"></div>
+             <div className="w-4 h-0.5 bg-white/20"></div>
           </div>
         </div>
       </div>

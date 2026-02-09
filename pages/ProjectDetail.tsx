@@ -8,102 +8,106 @@ import bipsuImage from '../assets/bipsu-dashboard.png';
 // @ts-ignore
 import jusasImage from '../assets/jusas-tropical.png';
 
+import { NavBar } from '../components/NavBar';
+import { Card } from '../components/UI/Card';
+import { Badge } from '../components/UI/Badge';
+import { Button } from '../components/UI/Button';
+
 export const ProjectDetail: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-  const [activeTab, setActiveTab] = useState<'Customer' | 'Admin'>('Customer');
 
   // If specific project is Jusas, render the custom layout
   if (id === 'jusas') {
     return (
-      <div className="bg-background-dark min-h-screen flex flex-col font-display text-white transition-colors duration-200 pb-24">
+      <div className="bg-background min-h-screen flex flex-col font-display text-white transition-colors duration-200 pb-24">
          {/* Header */}
-        <header className="sticky top-0 z-50 w-full bg-background-dark/80 backdrop-blur-md border-b border-slate-800">
-          <div className="flex items-center justify-between p-4 max-w-lg mx-auto">
-            <button onClick={() => navigate(-1)} className="flex items-center justify-center size-10 rounded-full hover:bg-slate-800 transition-colors group">
-              <span className="material-symbols-outlined text-white group-hover:text-primary transition-colors">arrow_back</span>
-            </button>
-            <h2 className="text-base font-bold leading-tight tracking-tight opacity-100 transition-opacity duration-300">Project Case Study</h2>
-             {/* GitHub Button - Mobile Optimized */}
-            <a href="https://github.com/carljohntruya-art/Jusas" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center size-10 rounded-full hover:bg-slate-800 transition-colors group">
-              <span className="material-symbols-outlined text-gray-400 group-hover:text-white transition-colors">code</span>
-            </a>
-          </div>
-        </header>
+         <NavBar 
+            title="Project Case Study" 
+            showBack={true} 
+            showMenu={false}
+            rightAction={
+              <a href="https://github.com/carljohntruya-art/Jusas" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center size-10 rounded-full hover:bg-white/10 transition-colors group">
+                <span className="material-symbols-outlined text-text-secondary group-hover:text-white transition-colors">code</span>
+              </a>
+            }
+         />
 
-        <main className="flex-1 w-full max-w-lg mx-auto">
+        <main className="flex-1 w-full max-w-4xl mx-auto px-6 pt-8 space-y-12">
           {/* Project Title Area */}
-          <div className="px-5 pt-6 pb-2">
-            <div className="flex flex-col gap-1 mb-6">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="px-2 py-1 rounded bg-blue-500/10 text-blue-400 text-xs font-bold uppercase tracking-wider">Mobile/Web App</span>
-                <span className="px-2 py-1 rounded bg-green-500/10 text-green-400 text-xs font-bold uppercase tracking-wider">Live Demo</span>
+          <div>
+            <div className="flex flex-col gap-4 mb-8">
+              <div className="flex items-center gap-2">
+                <Badge variant="accent">Mobile/Web App</Badge>
+                <Badge variant="success">Live Demo</Badge>
               </div>
-              <h1 className="text-4xl font-extrabold tracking-tight text-white leading-[1.1]">Jusas Smoothie Tropical App</h1>
-              <p className="text-gray-400 text-base mt-2 leading-relaxed">
+              <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">Jusas Smoothie Tropical App</h1>
+              <p className="text-text-secondary text-lg leading-relaxed max-w-2xl">
                  Create a smooth ordering experience for customers of Jusas Smoothie Tropical, with menu browsing, smoothie customization, and order tracking.
               </p>
             </div>
             
             {/* Tech Pills */}
-            <div className="flex gap-2 overflow-x-auto pb-4 scrollbar-hide">
-              {['React Web', 'Tailwind', 'Firebase/API'].map((t, i) => (
-                <span key={i} className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface border border-slate-800 shadow-sm whitespace-nowrap text-sm font-medium text-gray-300">
-                  <span className={`w-2 h-2 rounded-full ${i % 2 === 0 ? 'bg-blue-400' : 'bg-purple-400'}`}></span> {t}
-                </span>
+            <div className="flex flex-wrap gap-2">
+              {['React Web', 'Tailwind', 'Firebase/API'].map((t) => (
+                <Badge key={t} variant="secondary">{t}</Badge>
               ))}
             </div>
           </div>
 
-          <div className="px-5 mb-6">
-            <img src={jusasImage} alt="Jusas App UI" className="w-full rounded-xl border border-slate-800 shadow-lg" />
+          <div className="w-full">
+            <img src={jusasImage} alt="Jusas App UI" className="w-full rounded-xl border border-white/10 shadow-lg" />
           </div>
 
-          <div className="h-px bg-slate-800 mx-5 my-2"></div>
+          <div className="h-px bg-border w-full"></div>
 
           {/* Visual Content: System Flow */}
-          <div className="px-5 mt-4">
+          <div>
               <SystemFlow />
           </div>
 
-          <div className="h-px bg-slate-800 mx-5 my-6"></div>
+          <div className="h-px bg-border w-full"></div>
 
           {/* Visual Content: Wireframes */}
-          <div className="px-5">
+          <div>
              <Wireframes />
           </div>
 
-          <div className="h-px bg-slate-800 mx-5 my-6"></div>
+          <div className="h-px bg-border w-full"></div>
 
           {/* Visual Content: Database */}
-           <div className="px-5">
+           <div>
              <DatabaseSchema />
           </div>
 
           {/* Feature Highlights & CTA */}
-          <div className="px-5 mt-8 mb-12">
-            <h3 className="text-xl font-bold text-white mb-4">Challenges & Solutions</h3>
-            <div className="bg-surface border border-slate-800 rounded-xl p-5 shadow-sm space-y-4">
-               <div>
-                  <h4 className="font-bold text-white text-sm">📱 Optimized UI</h4>
-                  <p className="text-gray-400 text-sm mt-1">Designed for low-end devices ensuring smooth interactions and accessibility.</p>
-               </div>
-               <div>
-                  <h4 className="font-bold text-white text-sm">⚡ Fast Image Load</h4>
-                  <p className="text-gray-400 text-sm mt-1">Implemented lazy loading and optimized assets for instant visual feedback on mobile networks.</p>
-               </div>
-               <div>
-                  <h4 className="font-bold text-white text-sm">🔄 Seamless Workflow</h4>
-                  <p className="text-gray-400 text-sm mt-1">Streamlined the ordering process to minimize clicks and reduce abandonment rates.</p>
-               </div>
+          <div className="mb-12">
+            <h3 className="text-xl font-bold text-white mb-6">Challenges & Solutions</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+               <Card className="flex flex-col gap-2">
+                  <h4 className="font-bold text-white text-base">📱 Optimized UI</h4>
+                  <p className="text-text-secondary text-sm leading-relaxed">Designed for low-end devices ensuring smooth interactions and accessibility.</p>
+               </Card>
+               <Card className="flex flex-col gap-2">
+                  <h4 className="font-bold text-white text-base">⚡ Fast Image Load</h4>
+                  <p className="text-text-secondary text-sm leading-relaxed">Implemented lazy loading and optimized assets for instant visual feedback on mobile networks.</p>
+               </Card>
+               <Card className="flex flex-col gap-2">
+                  <h4 className="font-bold text-white text-base">🔄 Seamless Workflow</h4>
+                  <p className="text-text-secondary text-sm leading-relaxed">Streamlined the ordering process to minimize clicks and reduce abandonment rates.</p>
+               </Card>
             </div>
 
-            <div className="mt-6 flex flex-col gap-3">
-               <a href="https://github.com/carljohntruya-art/Jusas" target="_blank" rel="noopener noreferrer" className="w-full h-12 bg-slate-800 hover:bg-slate-700 rounded-lg flex items-center justify-center gap-2 transition-colors border border-slate-700 text-white font-bold">
-                 <span className="material-symbols-outlined">code</span> View Source Code
+            <div className="mt-8 flex flex-col sm:flex-row gap-4">
+               <a href="https://github.com/carljohntruya-art/Jusas" target="_blank" rel="noopener noreferrer" className="flex-1">
+                 <Button variant="secondary" fullWidth size="lg" leftIcon={<span className="material-symbols-outlined">code</span>}>
+                    View Source Code
+                 </Button>
                </a>
-               <a href="https://jusas-new.vercel.app" target="_blank" rel="noopener noreferrer" className="w-full h-12 bg-primary hover:bg-blue-600 rounded-lg flex items-center justify-center gap-2 transition-colors shadow-lg shadow-blue-500/20 text-white font-bold">
-                 <span className="material-symbols-outlined">rocket_launch</span> Visit Live Demo
+               <a href="https://jusas-new.vercel.app" target="_blank" rel="noopener noreferrer" className="flex-1">
+                 <Button fullWidth size="lg" leftIcon={<span className="material-symbols-outlined">rocket_launch</span>}>
+                    Visit Live Demo
+                 </Button>
                </a>
             </div>
           </div>
@@ -116,74 +120,67 @@ export const ProjectDetail: React.FC = () => {
   // Bipsu Complaint System
   if (id === 'bipsu') {
     return (
-      <div className="bg-background-dark min-h-screen flex flex-col font-display text-white transition-colors duration-200 pb-24">
+      <div className="bg-background min-h-screen flex flex-col font-display text-white transition-colors duration-200 pb-24">
          {/* Header */}
-        <header className="sticky top-0 z-50 w-full bg-background-dark/80 backdrop-blur-md border-b border-slate-800">
-          <div className="flex items-center justify-between p-4 max-w-lg mx-auto">
-            <button onClick={() => navigate(-1)} className="flex items-center justify-center size-10 rounded-full hover:bg-slate-800 transition-colors group">
-              <span className="material-symbols-outlined text-white group-hover:text-primary transition-colors">arrow_back</span>
-            </button>
-            <h2 className="text-base font-bold leading-tight tracking-tight opacity-100 transition-opacity duration-300">Project Case Study</h2>
-          </div>
-        </header>
+         <NavBar title="Project Case Study" showBack={true} showMenu={false} />
 
-        <main className="flex-1 w-full max-w-lg mx-auto">
+        <main className="flex-1 w-full max-w-4xl mx-auto px-6 pt-8 space-y-12">
           {/* Project Title Area */}
-          <div className="px-5 pt-6 pb-2">
-            <div className="flex flex-col gap-1 mb-6">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="px-2 py-1 rounded bg-blue-500/10 text-blue-400 text-xs font-bold uppercase tracking-wider">Web Application</span>
-                <span className="px-2 py-1 rounded bg-purple-500/10 text-purple-400 text-xs font-bold uppercase tracking-wider">Admin System</span>
+          <div>
+            <div className="flex flex-col gap-4 mb-8">
+              <div className="flex items-center gap-2">
+                <Badge variant="accent">Web Application</Badge>
+                <Badge variant="primary">Admin System</Badge>
               </div>
-              <h1 className="text-4xl font-extrabold tracking-tight text-white leading-[1.1]">Bipsu Complaint System</h1>
-              <p className="text-gray-400 text-base mt-2 leading-relaxed">
+              <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">Bipsu Complaint System</h1>
+              <p className="text-text-secondary text-lg leading-relaxed max-w-2xl">
                 Enable students to submit complaints/issues, track status, and generate reports efficiently.
               </p>
             </div>
             
             {/* Tech Pills */}
-            <div className="flex gap-2 overflow-x-auto pb-4 scrollbar-hide">
-              {['React', 'Node/Express', 'MySQL', 'JWT Auth', 'Tailwind'].map((t, i) => (
-                <span key={i} className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface border border-slate-800 shadow-sm whitespace-nowrap text-sm font-medium text-gray-300">
-                  <span className={`w-2 h-2 rounded-full ${i % 2 === 0 ? 'bg-blue-400' : 'bg-purple-400'}`}></span> {t}
-                </span>
+            <div className="flex flex-wrap gap-2">
+              {['React', 'Node/Express', 'MySQL', 'JWT Auth', 'Tailwind'].map((t) => (
+                <Badge key={t} variant="secondary">{t}</Badge>
               ))}
             </div>
           </div>
 
-          <div className="px-5 mb-6">
-            <img src={bipsuImage} alt="Bipsu Dashboard UI" className="w-full rounded-xl border border-slate-800 shadow-lg" />
+          <div className="w-full">
+            <img src={bipsuImage} alt="Bipsu Dashboard UI" className="w-full rounded-xl border border-white/10 shadow-lg" />
           </div>
 
           {/* Feature Highlights & Challenges */}
-          <div className="px-5 mt-8 mb-12">
-            <h3 className="text-xl font-bold text-white mb-4">Key Features</h3>
-            <ul className="list-disc list-inside text-gray-400 text-sm space-y-2 mb-8">
-                <li>Complaint submission form with categorization</li>
-                <li>Status tracking dashboard for students and admins</li>
-                <li>Notification system and reporting tools</li>
-            </ul>
+          <div className="mb-12">
+            <h3 className="text-xl font-bold text-white mb-6">Key Features</h3>
+            <Card className="mb-8">
+                <ul className="list-disc list-inside text-text-secondary text-sm space-y-3">
+                    <li>Complaint submission form with categorization</li>
+                    <li>Status tracking dashboard for students and admins</li>
+                    <li>Notification system and reporting tools</li>
+                </ul>
+            </Card>
 
-            <h3 className="text-xl font-bold text-white mb-4">Challenges & Solutions</h3>
-            <div className="bg-surface border border-slate-800 rounded-xl p-5 shadow-sm space-y-4">
-               <div>
-                  <h4 className="font-bold text-white text-sm">🔒 Secure Authentication</h4>
-                  <p className="text-gray-400 text-sm mt-1">Implemented JWT-based authentication to ensure secure access to student and admin portals.</p>
-               </div>
-               <div>
-                  <h4 className="font-bold text-white text-sm">⚡ Real-time Updates</h4>
-                  <p className="text-gray-400 text-sm mt-1">Used efficient polling/websockets to reflect complaint status changes instantly.</p>
-               </div>
-               <div>
-                  <h4 className="font-bold text-white text-sm">📊 User-Friendly Dashboard</h4>
-                  <p className="text-gray-400 text-sm mt-1">Designed a clean, intuitive interface for admins to manage high volumes of reports.</p>
-               </div>
+            <h3 className="text-xl font-bold text-white mb-6">Challenges & Solutions</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+               <Card className="flex flex-col gap-2">
+                  <h4 className="font-bold text-white text-base">🔒 Secure Authentication</h4>
+                  <p className="text-text-secondary text-sm leading-relaxed">Implemented JWT-based authentication to ensure secure access to student and admin portals.</p>
+               </Card>
+               <Card className="flex flex-col gap-2">
+                  <h4 className="font-bold text-white text-base">⚡ Real-time Updates</h4>
+                  <p className="text-text-secondary text-sm leading-relaxed">Used efficient polling/websockets to reflect complaint status changes instantly.</p>
+               </Card>
+               <Card className="flex flex-col gap-2">
+                  <h4 className="font-bold text-white text-base">📊 User-Friendly Dashboard</h4>
+                  <p className="text-text-secondary text-sm leading-relaxed">Designed a clean, intuitive interface for admins to manage high volumes of reports.</p>
+               </Card>
             </div>
 
-            <div className="mt-6 flex flex-col gap-3">
-               <button className="w-full h-12 bg-slate-800/50 cursor-not-allowed rounded-lg flex items-center justify-center gap-2 transition-colors border border-slate-700 text-gray-500 font-bold">
-                 <span className="material-symbols-outlined">lock</span> Source Private
-               </button>
+            <div className="mt-8">
+               <Button disabled fullWidth variant="secondary" leftIcon={<span className="material-symbols-outlined">lock</span>}>
+                 Source Private
+               </Button>
             </div>
           </div>
 
@@ -194,11 +191,11 @@ export const ProjectDetail: React.FC = () => {
 
   // Fallback for other projects or unknown IDs
   return (
-    <div className="bg-background-dark min-h-screen flex items-center justify-center flex-col gap-4 text-white">
+    <div className="bg-background min-h-screen flex items-center justify-center flex-col gap-4 text-white font-display">
       <h1 className="text-2xl font-bold">Project Not Found</h1>
-      <button onClick={() => navigate(-1)} className="text-primary hover:underline">
+      <Button variant="ghost" onClick={() => navigate(-1)}>
         Go Back
-      </button>
+      </Button>
     </div>
   );
 };

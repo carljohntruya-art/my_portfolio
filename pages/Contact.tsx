@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
+import { Button } from '../components/UI/Button';
 
 export const Contact: React.FC = () => {
   const navigate = useNavigate();
@@ -53,12 +54,14 @@ export const Contact: React.FC = () => {
     }
   };
 
+  const inputClasses = "w-full h-14 px-5 rounded-xl bg-surface border border-white/10 text-white placeholder-text-muted focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all disabled:opacity-50";
+
   return (
-    <div className="min-h-screen bg-background-dark text-white flex flex-col items-center justify-center p-6 relative overflow-hidden pb-24">
+    <div className="min-h-screen bg-background text-white flex flex-col items-center justify-center p-6 relative overflow-hidden pb-24 font-display">
        {/* Background */}
        <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-[-20%] right-[-20%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px]"></div>
-          <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-900/10 rounded-full blur-[100px]"></div>
+          <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-accent-purple/10 rounded-full blur-[100px]"></div>
        </div>
 
        <div className="w-full max-w-md z-10 animate-fade-in-up">
@@ -75,7 +78,7 @@ export const Contact: React.FC = () => {
               Let's Build<br/>
               <span className="text-primary">Something Great.</span>
             </h1>
-            <p className="text-slate-400 mt-4 max-w-xs mx-auto text-sm leading-relaxed">
+            <p className="text-text-secondary mt-4 max-w-xs mx-auto text-sm leading-relaxed">
                Have a project in mind or just want to say hi? Send me a message.
             </p>
          </div>
@@ -93,7 +96,7 @@ export const Contact: React.FC = () => {
                   value={formData.name}
                   onChange={handleChange}
                   disabled={isSubmitting}
-                  className="h-14 px-5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all disabled:opacity-50"
+                  className={inputClasses}
                />
             </div>
             <div className="flex flex-col gap-1">
@@ -105,7 +108,7 @@ export const Contact: React.FC = () => {
                   value={formData.email}
                   onChange={handleChange}
                   disabled={isSubmitting}
-                  className="h-14 px-5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all disabled:opacity-50"
+                  className={inputClasses}
                />
             </div>
             <div className="flex flex-col gap-1">
@@ -117,20 +120,20 @@ export const Contact: React.FC = () => {
                   value={formData.message}
                   onChange={handleChange}
                   disabled={isSubmitting}
-                  className="p-5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none disabled:opacity-50"
+                  className={`${inputClasses} h-auto py-5 resize-none`}
                ></textarea>
             </div>
             
-            <button 
+            <Button 
                type="submit" 
-               disabled={isSubmitting}
-               className="h-14 mt-2 rounded-xl bg-primary hover:bg-primary/90 text-white font-bold tracking-wide shadow-lg shadow-primary/25 flex items-center justify-center gap-2 transition-transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+               fullWidth
+               size="lg"
+               isLoading={isSubmitting}
+               className="mt-2 shadow-glow"
+               rightIcon={!isSubmitting && <span className="material-symbols-outlined text-[20px]">send</span>}
             >
-               <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
-               <span className={`material-symbols-outlined text-[20px] ${isSubmitting ? 'animate-spin' : ''}`}>
-                  {isSubmitting ? 'progress_activity' : 'send'}
-               </span>
-            </button>
+               {isSubmitting ? 'Sending...' : 'Send Message'}
+            </Button>
          </form>
 
          {/* Feedback Messages */}
