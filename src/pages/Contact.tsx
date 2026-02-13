@@ -14,11 +14,14 @@ import { PricingCalculator } from '@/components/PricingCalculator';
 const Contact: React.FC = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<'idle' | 'success' | 'error' | 'spam'>('idle');
+  const [formLoadTime] = useState(Date.now());
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
+    // Bot prevention
+    honeypot: '',
     // Project specific data from calculator
     appType: '',
     deployment: '',
@@ -39,14 +42,41 @@ const Contact: React.FC = () => {
     e.preventDefault();
     if (isSubmitting) return;
 
+    // 1. Honeypot check
+    if (formData.honeypot) {
+      console.warn("Bot detected via honeypot.");
+      setStatus('idle');
+      return;
+    }
+
+    // 2. Time-to-submit check (Prevent instant bot submissions)
+    const timeSpent = (Date.now() - formLoadTime) / 1000;
+    if (timeSpent < 3) {
+      console.warn("Submission too fast. Possible bot.");
+      setStatus('idle');
+      return;
+    }
+
+    // 3. Local Rate Limiting
+    const lastSubmit = localStorage.getItem('last_contact_submit');
+    if (lastSubmit && (Date.now() - parseInt(lastSubmit)) < 60000) {
+      setStatus('spam');
+      setTimeout(() => setStatus('idle'), 5000);
+      return;
+    }
+
     setIsSubmitting(true);
     setStatus('idle');
 
     try {
+      // Basic sanitization
+      const sanitisedMessage = formData.message.replace(/<[^>]*>?/gm, '');
+      const sanitisedName = formData.name.replace(/<[^>]*>?/gm, '');
+
       const templateParams = {
-        from_name: formData.name,
+        from_name: sanitisedName,
         from_email: formData.email,
-        message: formData.message,
+        message: sanitisedMessage,
         app_type: formData.appType,
         deployment: formData.deployment,
         complexity: formData.complexity,
@@ -63,11 +93,13 @@ const Contact: React.FC = () => {
         (import.meta as any).env.VITE_EMAILJS_PUBLIC_KEY || ''
       );
 
+      localStorage.setItem('last_contact_submit', Date.now().toString());
       setStatus('success');
       setFormData({ 
         name: '', 
         email: '', 
         message: '', 
+        honeypot: '',
         appType: '', 
         deployment: '', 
         complexity: '', 
@@ -139,6 +171,7 @@ const Contact: React.FC = () => {
                   type="text" 
                   placeholder="Your Name" 
                   required
+                  maxLength={100}
                   value={formData.name}
                   onChange={handleChange}
                   disabled={isSubmitting}
@@ -149,10 +182,25 @@ const Contact: React.FC = () => {
                   type="email" 
                   placeholder="Your Email" 
                   required
+                  maxLength={100}
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                   value={formData.email}
                   onChange={handleChange}
                   disabled={isSubmitting}
                   className={inputClasses}
+                />
+              </div>
+
+              {/* Honeypot field - Visually hidden to humans */}
+              <div className="hidden" aria-hidden="true">
+                <input 
+                  type="text" 
+                  name="honeypot" 
+                  tabIndex={-1} 
+                  autoComplete="off"
+                  maxLength={10}
+                  value={formData.honeypot}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -161,6 +209,7 @@ const Contact: React.FC = () => {
                 placeholder="Briefly describe your project goals..." 
                 rows={4}
                 required
+                maxLength={2000}
                 value={formData.message}
                 onChange={handleChange}
                 disabled={isSubmitting}
@@ -181,6 +230,11 @@ const Contact: React.FC = () => {
               {status === 'success' && (
                 <div className="p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 text-sm text-center">
                   Project inquiry sent successfully! I'll get back to you soon.
+                </div>
+              )}
+              {status === 'spam' && (
+                <div className="p-4 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-400 text-sm text-center">
+                  Please wait a minute before sending another message.
                 </div>
               )}
               {status === 'error' && (
