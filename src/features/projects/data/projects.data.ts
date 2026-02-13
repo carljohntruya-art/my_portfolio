@@ -16,7 +16,7 @@ export const PROJECTS = [
     metrics: [
       { label: "Efficiency Boost", value: "35%" },
       { label: "Active Users", value: "500+" },
-      { label: "Latence", value: "<100ms" }
+      { label: "Latency", value: "<100ms" }
     ],
     liveUrl: "https://taskflowcj.infinityfreeapp.com/",
     githubUrl: "https://github.com/carljohntruya-art/taskflow",
@@ -86,7 +86,7 @@ export const PROJECTS = [
     ],
     liveUrl: "",
     githubUrl: "",
-    images: ["/assets/meat-freshness-placeholder.png"]
+    images: ["https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=2000&auto=format&fit=crop"]
   },
   {
     id: "smart-personal-organize",
