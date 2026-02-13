@@ -106,7 +106,7 @@ export const PROJECTS = [
       { label: "Deployment", value: "Netlify" },
       { label: "Security", value: "JWT" }
     ],
-    liveUrl: "https://consttaskmanager.netlify.app/login",
+    liveUrl: "https://consttaskmanager.netlify.app/",
     githubUrl: "",
     images: ["/assets/task_manager.png"]
   }
