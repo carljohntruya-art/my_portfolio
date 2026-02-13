@@ -200,6 +200,11 @@ const Contact: React.FC = () => {
             <a href="mailto:carljohntruya@gmail.com" className="size-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors">
                <span className="material-symbols-outlined text-slate-400">alternate_email</span>
             </a>
+            <a href="https://www.facebook.com/share/184MVUv2Tt/" target="_blank" rel="noopener noreferrer" className="size-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors">
+               <svg className="w-5 h-5 text-slate-400 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                 <path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.859-5.978.54 0 4.393.235 4.393.235v3.125h-2.12c-2.32 0-3.02 1.392-3.02 2.92v1.278h3.999l-.5 3.667h-3.499v7.98c-1.637.382-2.973.805-4.832.227" />
+               </svg>
+            </a>
             {/* Add more social links here */}
           </motion.div>
           
