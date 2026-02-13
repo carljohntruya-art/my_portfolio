@@ -1,16 +1,14 @@
 import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
 
-const apiKey = process.env.API_KEY || (import.meta as any).env.VITE_GEMINI_API_KEY || '';
-let ai: GoogleGenAI | null = null;
-
-if (apiKey) {
-  ai = new GoogleGenAI({ apiKey });
-}
-
 export const generateAIResponse = async (prompt: string): Promise<string> => {
-  if (!ai) {
+  const apiKey = (import.meta as any).env.VITE_GEMINI_API_KEY || '';
+  
+  if (!apiKey) {
+    console.error("Gemini API Key is missing!");
     return "I'm sorry, I haven't been configured with an API key yet. Please contact the developer.";
   }
+
+  const ai = new GoogleGenAI({ apiKey });
 
   try {
     const systemInstruction = `You are "CJ's Assistant", a highly capable and friendly AI representing CJ (Carl John), a Full-Stack Developer and CS student.
