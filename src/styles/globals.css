@@ -1,0 +1,18 @@
+/* Global styles moved from root index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #101022;
+  color: white;
+}
+
+/* Add any custom design system tokens here if not in tailwind config */
