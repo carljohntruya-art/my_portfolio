@@ -9,6 +9,8 @@ import { NavBar } from '@/components/NavBar';
 import { motion } from 'framer-motion';
 import { fadeInUp } from '@/lib/animations';
 
+import { PricingCalculator } from '@/components/PricingCalculator';
+
 const Contact: React.FC = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -16,8 +18,18 @@ const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: ''
+    message: '',
+    // Project specific data from calculator
+    appType: '',
+    deployment: '',
+    complexity: '',
+    suggestedPrice: '',
+    budget: ''
   });
+
+  const handlePricingChange = (pricingData: any) => {
+    setFormData(prev => ({ ...prev, ...pricingData }));
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -35,19 +47,33 @@ const Contact: React.FC = () => {
         from_name: formData.name,
         from_email: formData.email,
         message: formData.message,
+        app_type: formData.appType,
+        deployment: formData.deployment,
+        complexity: formData.complexity,
+        suggested_price: formData.suggestedPrice,
+        budget: formData.budget,
         timestamp: new Date().toLocaleString(),
-        page_source: 'Contact Page'
+        page_source: 'Contact Page with Pricing'
       };
 
       await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID || '',
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '',
+        (import.meta as any).env.VITE_EMAILJS_SERVICE_ID || '',
+        (import.meta as any).env.VITE_EMAILJS_TEMPLATE_ID || '',
         templateParams,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY || ''
+        (import.meta as any).env.VITE_EMAILJS_PUBLIC_KEY || ''
       );
 
       setStatus('success');
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ 
+        name: '', 
+        email: '', 
+        message: '', 
+        appType: '', 
+        deployment: '', 
+        complexity: '', 
+        suggestedPrice: '', 
+        budget: '' 
+      });
       setTimeout(() => setStatus('idle'), 5000);
     } catch (error) {
       console.error('EmailJS Error:', error);
@@ -65,81 +91,105 @@ const Contact: React.FC = () => {
       <NavBar title="Get in Touch" showBack={true} showMenu={false} />
       
       <Container size="sm">
-        <Section animate className="pt-12">
-          <motion.div variants={fadeInUp} initial="initial" animate="animate" className="text-center mb-12">
+        <Section animate className="pt-12 pb-24">
+          <motion.div variants={fadeInUp} initial="initial" animate="animate" className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-               <span className="text-xs font-bold tracking-widest uppercase text-white/80">Open to Roles</span>
+               <span className="text-xs font-bold tracking-widest uppercase text-white/80">Available for Projects</span>
             </div>
             <h1 className="text-4xl font-extrabold leading-tight mb-4">
-              Let's Build<br/>
-              <span className="text-primary">Something Great.</span>
+              Plan Your Next<br/>
+              <span className="text-primary">Great Project.</span>
             </h1>
-            <p className="text-text-secondary mt-4 max-w-xs mx-auto text-base leading-relaxed">
-               Have a project in mind or just want to say hi? Send me a message.
+            <p className="text-text-secondary mt-4 max-w-sm mx-auto text-base leading-relaxed">
+               Ready to bring your idea to life? Use the calculator below to estimate costs and send your details.
             </p>
           </motion.div>
 
-          <motion.form 
-            variants={fadeInUp}
-            initial="initial"
-            animate="animate"
-            onSubmit={handleSubmit}
-            className="flex flex-col gap-4"
-          >
-            <input 
-              name="name"
-              type="text" 
-              placeholder="Your Name" 
-              required
-              value={formData.name}
-              onChange={handleChange}
-              disabled={isSubmitting}
-              className={inputClasses}
-            />
-            <input 
-              name="email"
-              type="email" 
-              placeholder="Your Email" 
-              required
-              value={formData.email}
-              onChange={handleChange}
-              disabled={isSubmitting}
-              className={inputClasses}
-            />
-            <textarea 
-              name="message"
-              placeholder="How can I help you?" 
-              rows={4}
-              required
-              value={formData.message}
-              onChange={handleChange}
-              disabled={isSubmitting}
-              className={`${inputClasses} h-auto py-5 resize-none`}
-            ></textarea>
-            
-            <Button 
-              type="submit" 
-              fullWidth
-              size="lg"
-              isLoading={isSubmitting}
-              className="mt-2 shadow-glow"
-              rightIcon={!isSubmitting && <span className="material-symbols-outlined text-[20px]">send</span>}
+          <div className="flex flex-col gap-12">
+            {/* Project Price Calculator Section */}
+            <motion.div 
+              variants={fadeInUp}
+              initial="initial"
+              animate="animate"
+              className="bg-white/5 border border-white/5 rounded-3xl p-6 md:p-10"
             >
-              {isSubmitting ? 'Sending...' : 'Send Message'}
-            </Button>
+              <div className="mb-10">
+                <h2 className="text-2xl font-bold text-white mb-2">Project Estimate</h2>
+                <p className="text-sm text-text-muted">Tell me about your requirements to get a price range.</p>
+              </div>
+              <PricingCalculator onSelectionChange={handlePricingChange} />
+            </motion.div>
 
-            {status === 'success' && (
-              <div className="p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 text-sm text-center">
-                Message sent successfully!
+            <motion.form 
+              variants={fadeInUp}
+              initial="initial"
+              animate="animate"
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-4"
+            >
+              <div className="mb-6">
+                <h2 className="text-xl font-bold text-white mb-2">Contact Information</h2>
+                <p className="text-sm text-text-muted">Finalize and send your inquiry.</p>
               </div>
-            )}
-            {status === 'error' && (
-              <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm text-center">
-                Something went wrong. Please try again.
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input 
+                  name="name"
+                  type="text" 
+                  placeholder="Your Name" 
+                  required
+                  value={formData.name}
+                  onChange={handleChange}
+                  disabled={isSubmitting}
+                  className={inputClasses}
+                />
+                <input 
+                  name="email"
+                  type="email" 
+                  placeholder="Your Email" 
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                  disabled={isSubmitting}
+                  className={inputClasses}
+                />
               </div>
-            )}
-          </motion.form>
+
+              <textarea 
+                name="message"
+                placeholder="Briefly describe your project goals..." 
+                rows={4}
+                required
+                value={formData.message}
+                onChange={handleChange}
+                disabled={isSubmitting}
+                className={`${inputClasses} h-auto py-5 resize-none`}
+              ></textarea>
+              
+              <Button 
+                type="submit" 
+                fullWidth
+                size="lg"
+                isLoading={isSubmitting}
+                className="mt-4 shadow-glow"
+                rightIcon={!isSubmitting && <span className="material-symbols-outlined text-[20px]">send</span>}
+              >
+                {isSubmitting ? 'Submitting Inquiry...' : 'Submit Inquiry'}
+              </Button>
+
+              {status === 'success' && (
+                <div className="p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 text-sm text-center">
+                  Project inquiry sent successfully! I'll get back to you soon.
+                </div>
+              )}
+              {status === 'error' && (
+                <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm text-center">
+                  Something went wrong. Please try again later.
+                </div>
+              )}
+            </motion.form>
+          </div>
 
           <motion.div 
             variants={fadeInUp}
