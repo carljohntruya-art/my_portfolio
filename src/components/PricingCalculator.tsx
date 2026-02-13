@@ -4,7 +4,7 @@ import {
   APP_TYPES, 
   DEPLOYMENT_TYPES, 
   COMPLEXITY_LEVELS, 
-  PRICING_MATRIX, 
+  getProjectPriceRange, 
   formatPrice,
   AppTypeId,
   DeploymentTypeId,
@@ -29,8 +29,8 @@ export const PricingCalculator: React.FC<PricingCalculatorProps> = ({ onSelectio
   const [budget, setBudget] = useState('');
 
   const calculatePriceRange = () => {
-    if (deployment && complexity) {
-      const range = PRICING_MATRIX[deployment][complexity];
+    const range = getProjectPriceRange(appType, deployment, complexity);
+    if (range) {
       return `${formatPrice(range.min)} - ${formatPrice(range.max)}`;
     }
     return '';

@@ -33,6 +33,22 @@ export type AppTypeId = typeof APP_TYPES[number]['id'];
 export type DeploymentTypeId = typeof DEPLOYMENT_TYPES[number]['id'];
 export type ComplexityId = typeof COMPLEXITY_LEVELS[number]['id'];
 
+export function getProjectPriceRange(appType: string, deployment: string, complexity: string) {
+  if (!deployment || !complexity) return null;
+  
+  const baseRange = PRICING_MATRIX[deployment as DeploymentTypeId][complexity as ComplexityId];
+  
+  // Apply 50% reduction for Portfolio sites when deployed
+  if (appType === 'portfolio' && deployment === 'deployed') {
+    return {
+      min: baseRange.min * 0.5,
+      max: baseRange.max * 0.5
+    };
+  }
+  
+  return baseRange;
+}
+
 export function formatPrice(amount: number): string {
   return `₱${amount.toLocaleString('en-PH')}`;
 }
