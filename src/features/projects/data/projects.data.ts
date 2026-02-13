@@ -20,7 +20,7 @@ export const PROJECTS = [
     ],
     liveUrl: "https://taskflowcj.infinityfreeapp.com/",
     githubUrl: "https://github.com/carljohntruya-art/taskflow",
-    images: ["./assets/taskflow.png"]
+    images: ["/assets/taskflow.png"]
   },
   {
     id: "jusas",
@@ -42,7 +42,7 @@ export const PROJECTS = [
     ],
     liveUrl: "https://jusas-new.vercel.app",
     githubUrl: "https://github.com/carljohntruya-art/Jusas",
-    images: ["./assets/jusas-tropical.png"]
+    images: ["/assets/jusas-tropical.png"]
   },
   {
     id: "bipsu",
@@ -64,7 +64,7 @@ export const PROJECTS = [
     ],
     liveUrl: "",
     githubUrl: "",
-    images: ["./assets/bipsu-dashboard.png"]
+    images: ["/assets/bipsu-dashboard.png"]
   },
   {
     id: "meat-freshness",
@@ -86,7 +86,7 @@ export const PROJECTS = [
     ],
     liveUrl: "",
     githubUrl: "",
-    images: ["./assets/meat-freshness-placeholder.png"]
+    images: ["/assets/meat-freshness-placeholder.png"]
   },
   {
     id: "smart-personal-organize",
@@ -108,6 +108,6 @@ export const PROJECTS = [
     ],
     liveUrl: "https://consttaskmanager.netlify.app/login",
     githubUrl: "",
-    images: ["./assets/task_manager.png"]
+    images: ["/assets/task_manager.png"]
   }
 ];

@@ -112,9 +112,9 @@ const Home: React.FC = () => {
                     <img 
                       alt="CJ Avatar" 
                       className="w-full h-full object-cover" 
-                      src="./assets/cjj.jpg"
+                      src="/assets/cjj.jpg"
                       onError={(e) => {
-                          (e.target as HTMLImageElement).src = `./assets/cjj.jpg`;
+                          (e.target as HTMLImageElement).src = "/assets/cjj.jpg";
                       }}
                     />
                   </div>
